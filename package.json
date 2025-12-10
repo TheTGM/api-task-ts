@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/app.js",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
+    "start": "node dist/server.js",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/server.ts",
     "lint": "eslint 'src/**/*.ts'"
   },
   "repository": {
@@ -22,12 +22,14 @@
     "url": "https://github.com/TheTGM/api-task-ts/issues"
   },
   "homepage": "https://github.com/TheTGM/api-task-ts#readme",
+  "dependencies": {
+    "express": "5.2.1",
+    "dotenv": "17.2.3"
+  },
   "devDependencies": {
     "@types/express": "5.0.6",
     "@types/node": "24.10.1",
-    "dotenv": "17.2.3",
     "eslint": "9.39.1",
-    "express": "5.2.1",
     "install": "0.13.0",
     "nodemon": "3.1.11",
     "npm": "11.6.4",
