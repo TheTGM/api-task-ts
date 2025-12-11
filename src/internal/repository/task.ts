@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { Task } from "../domain/task.ts";
-import type { TaskDTO } from "./dto.ts"
+import { TaskMapper, type TaskDTO } from "./dto.ts"
 
 class TaskRepository {
     private supabase: SupabaseClient;
@@ -16,9 +16,7 @@ class TaskRepository {
                 .select('*')
                 .order('created_at', { ascending: true });
             if (error) throw error;
-            return data.map((task: TaskDTO) =>
-                this.mapToTask(task as Task)
-            );
+            return data.map((task: TaskDTO) => TaskMapper.toDomain(task));
         } catch (error) {
             throw new Error(`Error finding tasks: ${(error as Error).message}`);
         }
@@ -34,21 +32,10 @@ class TaskRepository {
                 if (error.code === 'PGRST116') return null;
                 throw error;
             }
-            return this.mapToTask(data as TaskDTO);
+            return TaskMapper.toDomain(data);
         } catch (error) {
             throw new Error(`Error finding task: ${this.getErrorMessage(error)}`);
         }
-    }
-    private mapToTask(taskDTO: TaskDTO): Task {
-        return new Task(
-            taskDTO.id,
-            taskDTO.name,
-            taskDTO.description,
-            taskDTO.resolved,
-            taskDTO.created_at,
-            taskDTO.updated_at,
-            taskDTO.finished_at
-        );
     }
     private getErrorMessage(error: unknown): string {
         if (error instanceof Error) return error.message;
