@@ -23,12 +23,13 @@
   },
   "homepage": "https://github.com/TheTGM/api-task-ts#readme",
   "dependencies": {
-    "express": "5.2.1",
-    "dotenv": "17.2.3"
+    "@supabase/supabase-js": "^2.87.1",
+    "dotenv": "17.2.3",
+    "express": "5.2.1"
   },
   "devDependencies": {
-    "@types/express": "5.0.6",
-    "@types/node": "24.10.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.1",
     "eslint": "9.39.1",
     "install": "0.13.0",
     "nodemon": "3.1.11",

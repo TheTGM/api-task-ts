@@ -1,8 +1,8 @@
 import { Router } from 'express';
-const router = Router()
+import container from './dependencies.ts';
+const router = Router();
+const taskController = container.get('taskController');
 
-router.get('/tasks', (req, res) => {
-    res.send('Hello World!')
-});
+router.get('/tasks', taskController.getAllUsers.bind(taskController))
 
 export default router;
