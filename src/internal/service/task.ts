@@ -5,8 +5,11 @@ class TaskService {
     constructor(taskRepository: TaskRepository) {
         this.taskRepository = taskRepository;
     }
-    async getAllUsers() {
+    async getAllTask() {
         return await this.taskRepository.findAll();
+    }
+    async getTaskByID(id: string) {
+        return await this.taskRepository.findById(id);
     }
 }
 

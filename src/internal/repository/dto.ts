@@ -1,9 +1,9 @@
 export interface TaskDTO {
-    uuid: string;
+    id: string;
     name: string;
-    description: string | null;
+    description: string;
     resolved: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-    finishedAt?: Date;
+    created_at: Date;
+    updated_at: Date;
+    finished_at: Date;
 }

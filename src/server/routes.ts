@@ -3,6 +3,7 @@ import container from './dependencies.ts';
 const router = Router();
 const taskController = container.get('taskController');
 
-router.get('/tasks', taskController.getAllUsers.bind(taskController))
+router.get('/tasks', taskController.getAllTask.bind(taskController))
+router.get('/tasks/:id', taskController.getTaskByID.bind(taskController))
 
 export default router;
