@@ -7,7 +7,7 @@ export interface TaskDTO {
     resolved: boolean;
     created_at: Date;
     updated_at: Date;
-    finished_at: Date;
+    finished_at: Date | null;
 }
 
 export class TaskMapper {
@@ -31,7 +31,7 @@ export class TaskMapper {
             resolved: task.resolved,
             created_at: task.created_at,
             updated_at: task.updated_at,
-            finished_at: task.finished_at
+            finished_at: task.finished_at || null
         };
     }
 }

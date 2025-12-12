@@ -34,6 +34,21 @@ class TaskController {
             next(error);
         }
     }
+    async createTask(req: Request, res: Response, next: NextFunction) {
+        try {
+            const taskData = req.body;
+            if (!taskData.name || !taskData.description) {
+                throw new Error(`missing fields`);
+            }
+            const task = await this.taskService.createTask(taskData);
+            res.status(201).json({
+                success: true,
+                data: task
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default TaskController;

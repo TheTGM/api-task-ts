@@ -5,7 +5,7 @@ export class Task {
     resolved: boolean;
     created_at: Date;
     updated_at: Date;
-    finished_at: Date;
+    finished_at: Date | null;
 
     constructor(
         id: string,
@@ -14,7 +14,7 @@ export class Task {
         resolved: boolean,
         created_at: Date,
         updated_at: Date,
-        finished_at: Date
+        finished_at: Date | null
     ) {
         this.id = id;
         this.name = name;
