@@ -5,8 +5,8 @@ export interface TaskDTO {
     name: string;
     description: string;
     resolved: boolean;
-    created_at: Date;
-    updated_at: Date;
+    created_at: Date | null;
+    updated_at: Date | null;
     finished_at: Date | null;
 }
 

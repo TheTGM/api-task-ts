@@ -54,6 +54,27 @@ class TaskRepository {
             throw new Error(`Error saving task: ${this.getErrorMessage(error)}`);
         }
     }
+    async update(id: string, task: Task): Promise<Task | null>  {
+        try {
+            const { data, error } = await this.supabase
+                .from(this.table)
+                .update({
+                    name: task.name,
+                    description: task.description,
+                    resolved: task.resolved
+                })
+                .eq('uuid', id)
+                .select()
+                .single();
+            if (error) {
+                if (error.code === '42703') return null;
+                throw error;
+            }
+            return TaskMapper.toDomain(data)
+        } catch (error) {
+            throw new Error(`Error updating task: ${this.getErrorMessage(error)}`);
+        }
+    }
     private getErrorMessage(error: unknown): string {
         if (error instanceof Error) return error.message;
         return String(error);

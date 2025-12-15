@@ -3,8 +3,8 @@ export class Task {
     name: string;
     description: string;
     resolved: boolean;
-    created_at: Date;
-    updated_at: Date;
+    created_at: Date | null;
+    updated_at: Date | null;
     finished_at: Date | null;
 
     constructor(
@@ -12,8 +12,8 @@ export class Task {
         name: string,
         description: string,
         resolved: boolean,
-        created_at: Date,
-        updated_at: Date,
+        created_at: Date | null,
+        updated_at: Date | null,
         finished_at: Date | null
     ) {
         this.id = id;

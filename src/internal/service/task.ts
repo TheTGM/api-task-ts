@@ -7,18 +7,20 @@ class TaskService {
     constructor(taskRepository: TaskRepository) {
         this.taskRepository = taskRepository;
     }
-    async getAllTask() {
+    async getAllTask(): Promise<Task[]> {
         return await this.taskRepository.findAll();
     }
-    async getTaskByID(id: string) {
+    async getTaskByID(id: string): Promise<Task | null> {
         return await this.taskRepository.findById(id);
     }
-    async createTask(taskData: Task) {
+    async createTask(taskData: Task): Promise<Task> {
         const uuid = uuidv7();
-        const dateUTC = new Date().getUTCDate();
-        const dateParsed = new Date(dateUTC)
-        const task = new Task(uuid, taskData.name, taskData.description, false, dateParsed, dateParsed, null);
+        const task = new Task(uuid, taskData.name, taskData.description, false, null, null, null);
         return await this.taskRepository.save(task);
+    }
+    async updateTask(id: string, taskData: Task): Promise<Task | null> {
+        const task = new Task(id, taskData.name, taskData.description, false, null, null, null);
+        return await this.taskRepository.update(id, task);
     }
 }
 
