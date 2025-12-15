@@ -25,6 +25,9 @@ class TaskService {
     async deleteTask(id: string): Promise<boolean | null> {
         return await this.taskRepository.delete(id);
     }
+    async finishTask(id: string): Promise<Task | null> {
+        return await this.taskRepository.finish(id, new Date());
+    }
 }
 
 export default TaskService;

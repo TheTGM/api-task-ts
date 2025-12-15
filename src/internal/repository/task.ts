@@ -1,6 +1,7 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 import { Task } from "../domain/task.ts";
 import { TaskMapper, type TaskDTO } from "./dto.ts"
+import { finished } from 'stream';
 
 class TaskRepository {
     private supabase: SupabaseClient;
@@ -86,6 +87,26 @@ class TaskRepository {
                 throw error;
             } 
             return true;
+        } catch (error) {
+            throw new Error(`Error updating task: ${this.getErrorMessage(error)}`);
+        }
+    }
+    async finish(id: string, finished_at: Date): Promise<Task | null> {
+        try {
+            const { data, error } = await this.supabase
+                .from(this.table)
+                .update({
+                    resolved: true,
+                    finished_at: finished_at,
+                })
+                .eq('uuid', id)
+                .select()
+                .single();
+            if (error) {
+                if (error.code === 'PGRST116') return null;
+                throw error;
+            }
+            return TaskMapper.toDomain(data)
         } catch (error) {
             throw new Error(`Error updating task: ${this.getErrorMessage(error)}`);
         }

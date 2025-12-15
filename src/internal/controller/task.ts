@@ -84,6 +84,22 @@ class TaskController {
             next(error);
         }
     }
+    async finishTask(req: Request, res: Response, next: NextFunction) {
+        try {
+            let taskId
+            if (!req.params.id || !isValidUUID(req.params.id)) {
+                throw new Error('Invalid TaskID');
+            }
+            taskId = String(req.params.id)
+            const task = await this.taskService.finishTask(taskId);
+            res.status(200).json({
+                success: true,
+                data: task
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default TaskController;
