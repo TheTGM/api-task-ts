@@ -69,6 +69,21 @@ class TaskController {
             next(error);
         }
     }
+    async deleteTask(req: Request, res: Response, next: NextFunction) {
+        try {
+            let taskId
+            if (!req.params.id || !isValidUUID(req.params.id)) {
+                throw new Error('Invalid TaskID');
+            }
+            taskId = String(req.params.id)
+            await this.taskService.deleteTask(taskId);
+            res.status(200).json({
+                success: true,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 export default TaskController;

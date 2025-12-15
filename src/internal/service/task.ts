@@ -22,6 +22,9 @@ class TaskService {
         const task = new Task(id, taskData.name, taskData.description, false, null, null, null);
         return await this.taskRepository.update(id, task);
     }
+    async deleteTask(id: string): Promise<boolean | null> {
+        return await this.taskRepository.delete(id);
+    }
 }
 
 export default TaskService;

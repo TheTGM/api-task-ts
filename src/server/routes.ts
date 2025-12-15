@@ -7,5 +7,6 @@ router.get('/tasks', taskController.getAllTask.bind(taskController))
 router.get('/tasks/:id', taskController.getTaskByID.bind(taskController))
 router.post('/tasks', taskController.createTask.bind(taskController))
 router.put('/tasks/:id', taskController.updateTask.bind(taskController))
+router.delete('/tasks/:id', taskController.deleteTask.bind(taskController))
 
 export default router;
